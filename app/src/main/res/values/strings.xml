@@ -5,4 +5,5 @@
     <string name="login">Bejelentkezés</string>
     <string name="register">Regisztráció</string>
     <string name="rePassword">Jelszó megerősítés</string>
+    <string name="email">E-mail</string>
 </resources>
