@@ -34,7 +34,7 @@
         android:layout_marginBottom="10dp"
         android:paddingTop="10dp"
         android:text="Orvosok"
-        android:textColor="@color/warm_yellow"
+        android:textColor="@color/soft_blueish_purple"
         android:textSize="18sp"
         android:textStyle="bold"
         />
@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:text="Gyerek orvos"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:text="Dietetikus"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:text="Kardiológus"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:text="Fogorvos"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -217,7 +217,7 @@
                     android:layout_height="wrap_content"
                     android:text="Sebész"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -252,7 +252,7 @@
                     android:layout_height="wrap_content"
                     android:text="Vissza"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

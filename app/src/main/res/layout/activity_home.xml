@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:text="Labor"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:text="Gyógyszerek"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:text="Orvosok"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -168,7 +168,7 @@
                     android:layout_height="wrap_content"
                     android:text="Időpont"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -203,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:text="Rendeléseim"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -238,7 +238,7 @@
                     android:layout_height="wrap_content"
                     android:text="Kilépés"
                     android:textAlignment="center"
-                    android:textColor="@color/warm_yellow"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
