@@ -49,5 +49,14 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this,FindDoctorActivity.class));
             }
         });
+
+        CardView appointments = findViewById(R.id.cardAppointment);
+
+        appointments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this,AppointmentsActivity.class));
+            }
+        });
     }
 }

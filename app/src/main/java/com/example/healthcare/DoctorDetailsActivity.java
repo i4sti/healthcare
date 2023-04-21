@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -87,13 +88,13 @@ public class DoctorDetailsActivity extends AppCompatActivity {
             doctor_detail = doctor_details5;
 
 
-            btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DoctorDetailsActivity.this,FindDoctorActivity.class));
-            }
+        btn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(DoctorDetailsActivity.this,FindDoctorActivity.class));
+        }
 
-            });
+        });
 
         list = new ArrayList();
         for (int i = 0; i < doctor_detail.length; i++) {
@@ -109,6 +110,21 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                 new int[]{R.id.line_a,R.id.line_b,R.id.line_c,R.id.line_d});
         ListView lst = findViewById(R.id.listViewDD);
         lst.setAdapter(sa);
+
+        lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String[] parts = doctor_detail[i][1].split(",");
+                String result = parts[0];
+                Intent it = new Intent(DoctorDetailsActivity.this,BookAppointmentActivity.class);
+                it.putExtra("text1",title);
+                it.putExtra("text2",doctor_detail[i][0]);
+                it.putExtra("text3",doctor_detail[i][1]);
+                it.putExtra("text4",doctor_detail[i][3]);
+
+                startActivity(it);
+            }
+        });
     }
 
 }
