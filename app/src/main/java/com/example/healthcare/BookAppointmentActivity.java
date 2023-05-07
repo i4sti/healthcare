@@ -1,6 +1,7 @@
 package com.example.healthcare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -13,8 +14,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.UUID;
 
 public class BookAppointmentActivity extends AppCompatActivity {
 
@@ -25,11 +32,16 @@ public class BookAppointmentActivity extends AppCompatActivity {
 
     private Button dateButton, timeButton, bookAppointmentButton, backButton;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_appointment);
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         tv = findViewById(R.id.textViewAppTitle);
         ed1 = findViewById(R.id.EditTextAppFullName);
         ed2 = findViewById(R.id.editTextAppAddress);
@@ -76,6 +88,53 @@ public class BookAppointmentActivity extends AppCompatActivity {
         bookAppointmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // beállítjuk az appointment adatait a formon megadott értékekre
+                Appointment appointment = new Appointment();
+                appointment.setId(UUID.randomUUID().toString());
+
+                appointment.setFullName(ed1.getText().toString());
+                appointment.setAddress(ed2.getText().toString());
+                appointment.setPhoneNumber(ed3.getText().toString());
+                appointment.setDate(dateButton.getText().toString());
+                appointment.setTime(timeButton.getText().toString());
+
+
+                // hozzáférés az adatbázishoz az AppointmentViewModel segítségével
+                AppointmentViewModel appointmentViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(AppointmentViewModel.class);
+
+
+//
+
+                if (currentUser != null) {
+                    String email = currentUser.getEmail();
+                    if (email != null) {
+                        // a felhasználó be van jelentkezve, és van érvényes email címe
+                        String userId = currentUser.getUid();
+                        // Az userId értékét beállítjuk az "appointment_table" tábla "user_id" mezőjére
+                        appointment.setUserId(userId);
+                        // beszúrás az adatbázisba
+                        appointmentViewModel.insert(appointment);
+                        Toast.makeText(BookAppointmentActivity.this, "siker", Toast.LENGTH_SHORT).show();
+                        // visszalépés az előző képernyőre
+                        startActivity(new Intent(BookAppointmentActivity.this, FindDoctorActivity.class));
+                    } else {
+                        Toast.makeText(BookAppointmentActivity.this, "Nem lehet időpontot foglalni vendégként", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(BookAppointmentActivity.this, LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                } else {
+                    // Az időpontfoglalás nem engedélyezett, mert a felhasználó nincs bejelentkezve
+                    Toast.makeText(BookAppointmentActivity.this, "A foglaláshoz be kell jelentkezni!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(BookAppointmentActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+
+
 
             }
         });
@@ -83,7 +142,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(BookAppointmentActivity.this,DoctorDetailsActivity.class));
+                startActivity(new Intent(BookAppointmentActivity.this,FindDoctorActivity.class));
             }
         });
     }

@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 
 import java.util.List;

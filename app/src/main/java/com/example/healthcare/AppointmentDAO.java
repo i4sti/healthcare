@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -16,10 +17,12 @@ public interface AppointmentDAO {
 
     @Query("DELETE FROM appointment_table")
     void deleteAll();
-    //@Delete
-    //void delete(Appointment appointment);
+    @Delete
+    void delete(Appointment appointment);
 
     @Query("SELECT * FROM appointment_table ORDER BY user_id ASC")
     LiveData<List<Appointment>> getAppointments();
 
+    @Update
+    void update(Appointment appointment);
 }
