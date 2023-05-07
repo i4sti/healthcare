@@ -37,20 +37,15 @@ public class AppointmentRepository {
     public LiveData<List<Appointment>> getAllAppointments(){
        return dao.getAppointments();
     }
-
     public void insert(Appointment appointment){
-//        new insert(this.dao).execute(appointment);
         new insertAsyncTask(dao, appointmentsRef).execute(appointment);
     }
-
     public void update(Appointment appointment) {
         new updateAsyncTask(dao, appointment).execute();
     }
-
     public void delete(Appointment appointment) {
         new deleteAsyncTask(dao, appointment).execute();
     }
-
     private static class updateAsyncTask extends AsyncTask<Void, Void, Void> {
         private AppointmentDAO mAsyncTaskDao;
         private Appointment mAppointment;
@@ -66,7 +61,6 @@ public class AppointmentRepository {
             return null;
         }
     }
-
     private static class deleteAsyncTask extends AsyncTask<Void, Void, Void> {
         private AppointmentDAO mAsyncTaskDao;
         private Appointment mAppointment;
@@ -82,10 +76,6 @@ public class AppointmentRepository {
             return null;
         }
     }
-
-
-
-
     private static class insertAsyncTask extends AsyncTask<Appointment, Void, Void> {
         private AppointmentDAO mAsyncTaskDao;
         private CollectionReference mFirestoreRef;

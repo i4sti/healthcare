@@ -1,11 +1,15 @@
 package com.example.healthcare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -114,11 +118,32 @@ public class BookAppointmentActivity extends AppCompatActivity {
                         appointment.setUserId(userId);
                         // beszúrás az adatbázisba
                         appointmentViewModel.insert(appointment);
-                        Toast.makeText(BookAppointmentActivity.this, "siker", Toast.LENGTH_SHORT).show();
+// NotificationManager inicializálása
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+// NotificationChannel létrehozása a NotificationManager-ben
+                        String channelId = "my_channel_id";
+                        CharSequence channelName = "My Channel";
+                        int importance = NotificationManager.IMPORTANCE_HIGH;
+                        NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
+                        notificationManager.createNotificationChannel(notificationChannel);
+
+// Notification létrehozása
+                        String notificationTitle = "Sikeres időpont foglalás";
+                        String notificationText = "Az időpont foglalás sikeres volt";
+                        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(BookAppointmentActivity.this, channelId)
+                                .setSmallIcon(R.drawable.info)
+                                .setContentTitle(notificationTitle)
+                                .setContentText(notificationText)
+                                .setAutoCancel(true)
+                                .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+// Notification elküldése
+                        notificationManager.notify(0, notificationBuilder.build());
                         // visszalépés az előző képernyőre
                         startActivity(new Intent(BookAppointmentActivity.this, FindDoctorActivity.class));
                     } else {
-                        Toast.makeText(BookAppointmentActivity.this, "Nem lehet időpontot foglalni vendégként", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BookAppointmentActivity.this, "Nem lehet időpontot foglalni vendégként, vagy valami nem sikerült", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(BookAppointmentActivity.this, LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
@@ -143,6 +168,8 @@ public class BookAppointmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(BookAppointmentActivity.this,FindDoctorActivity.class));
+//                overridePendingTransition(R.anim.slide_in_down, R.anim.slide_in_up);
+
             }
         });
     }

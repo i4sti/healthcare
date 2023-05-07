@@ -27,6 +27,8 @@ public class AppointmentViewModel extends AndroidViewModel {
     private FirebaseFirestore db;
     private CollectionReference appointmentRef;
 
+
+
     public  AppointmentViewModel(Application application){
         super(application);
         this.repository = new AppointmentRepository(application);
@@ -62,9 +64,6 @@ public class AppointmentViewModel extends AndroidViewModel {
                             }
                         });
 
-                // Room-on mentés
-                repository.insert(appointment);
-
                 return null;
             }
         }.execute();
@@ -89,9 +88,6 @@ public class AppointmentViewModel extends AndroidViewModel {
                                 Log.w(TAG, "Error updating document", e);
                             }
                         });
-
-                // Room-on frissítés
-                repository.update(appointment);
 
                 return null;
             }
@@ -119,8 +115,6 @@ public class AppointmentViewModel extends AndroidViewModel {
                             }
                         });
 
-                // Room-on törlés
-                repository.delete(appointment);
 
                 return null;
             }
@@ -141,14 +135,6 @@ public class AppointmentViewModel extends AndroidViewModel {
                                 if (documentSnapshot.exists()) {
                                     Appointment updatedAppointment = documentSnapshot.toObject(Appointment.class);
                                     updatedAppointment.setId(documentSnapshot.getId());
-                                    // Room-on frissítés
-                                    new AsyncTask<Void, Void, Void>() {
-                                        @Override
-                                        protected Void doInBackground(Void... voids) {
-                                            repository.update(updatedAppointment);
-                                            return null;
-                                        }
-                                    }.execute();
                                 } else {
                                     Log.d(TAG, "No such document");
                                 }
@@ -164,6 +150,8 @@ public class AppointmentViewModel extends AndroidViewModel {
             }
         }.execute();
     }
+
+
 
 
 }

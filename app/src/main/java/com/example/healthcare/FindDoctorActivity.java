@@ -20,6 +20,8 @@ public class FindDoctorActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 startActivity(new Intent(FindDoctorActivity.this,HomeActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
             }
         });
 

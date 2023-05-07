@@ -123,6 +123,8 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                 it.putExtra("text4",doctor_detail[i][3]);
 
                 startActivity(it);
+//                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_down);
+
             }
         });
     }
